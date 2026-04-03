@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,8 +46,11 @@
     --gradient-red: linear-gradient(135deg, hsl(0, 78%, 50%), hsl(15, 90%, 55%));
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
-    --font-display: 'Oswald', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
+
+    --ambient-red: radial-gradient(ellipse 600px 400px at 20% 50%, hsl(0 78% 50% / 0.06), transparent);
+    --ambient-red-right: radial-gradient(ellipse 500px 500px at 80% 30%, hsl(0 78% 50% / 0.04), transparent);
   }
 }
 
@@ -89,6 +93,36 @@
 
   .glow-border {
     box-shadow: var(--shadow-glow);
+  }
+
+  .ambient-glow {
+    position: relative;
+  }
+  .ambient-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ambient-red);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-glow::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: hsl(0 78% 50% / 0);
+    transition: background 0.3s ease;
+    z-index: -1;
+    filter: blur(12px);
+  }
+  .btn-glow:hover::after {
+    background: hsl(0 78% 50% / 0.3);
   }
 
   .noise-overlay {

@@ -1,12 +1,25 @@
 import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
 import CTAButtons from "./CTAButtons";
+import { useCountUp } from "@/hooks/useCountUp";
+
+const CountUpStat = ({ target, suffix, label }: { target: number; suffix: string; label: string }) => {
+  const { value, ref } = useCountUp(target);
+  return (
+    <div ref={ref} className="glass-surface rounded-2xl p-8 text-center">
+      <div className="font-display text-4xl font-bold text-gradient-red md:text-5xl">
+        {value}{suffix}
+      </div>
+      <div className="mt-3 font-body text-sm text-muted-foreground">{label}</div>
+    </div>
+  );
+};
 
 const stats = [
-  { value: "10+", label: "Лет опыта" },
-  { value: "∞", label: "Гарантия на работы" },
-  { value: "1 день", label: "Срок большинства работ" },
-  { value: "100%", label: "Запчасти под ключ" },
+  { target: 10, suffix: "+", label: "Лет опыта" },
+  { target: 0, suffix: "∞", label: "Гарантия на работы", isSymbol: true },
+  { target: 1, suffix: " день", label: "Срок большинства работ" },
+  { target: 100, suffix: "%", label: "Запчасти под ключ" },
 ];
 
 const AdvantagesSection = () => (
@@ -20,12 +33,16 @@ const AdvantagesSection = () => (
       <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <AnimatedSection key={s.label} delay={i * 0.12}>
-            <div className="glass-surface rounded-2xl p-8 text-center">
-              <div className="font-display text-4xl font-bold text-gradient-red md:text-5xl">
-                {s.value}
+            {s.isSymbol ? (
+              <div className="glass-surface rounded-2xl p-8 text-center">
+                <div className="font-display text-4xl font-bold text-gradient-red md:text-5xl">
+                  ∞
+                </div>
+                <div className="mt-3 font-body text-sm text-muted-foreground">{s.label}</div>
               </div>
-              <div className="mt-3 font-body text-sm text-muted-foreground">{s.label}</div>
-            </div>
+            ) : (
+              <CountUpStat target={s.target} suffix={s.suffix} label={s.label} />
+            )}
           </AnimatedSection>
         ))}
       </div>

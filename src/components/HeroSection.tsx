@@ -18,6 +18,9 @@ const HeroSection = () => (
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
     </div>
 
+    {/* Ambient light */}
+    <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 800px 500px at 10% 60%, hsl(0 78% 50% / 0.08), transparent)' }} />
+
     {/* Content */}
     <div className="container relative z-10 mx-auto px-6 py-32">
       <div className="max-w-3xl">
@@ -28,16 +31,21 @@ const HeroSection = () => (
           className="mb-6 flex items-center gap-4"
         >
           <div className="h-px w-12 bg-primary" />
-          <span className="font-body text-xs font-medium uppercase tracking-[0.3em] text-primary">
-            Автосервис · Новосибирск
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="font-display text-xs font-medium uppercase tracking-[0.3em] text-primary">
+              Автосервис
+            </span>
+            <span className="inline-flex items-center rounded-full border border-primary/30 px-3 py-0.5 font-display text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
+              Новосибирск
+            </span>
+          </div>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="font-display text-5xl font-bold leading-[0.95] md:text-7xl lg:text-8xl"
+          className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl"
         >
           Good<span className="text-gradient-red">Avto</span>
           <br />

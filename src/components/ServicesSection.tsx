@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
 import {
@@ -20,8 +21,8 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section id="services" className="relative py-28">
-    <div className="container mx-auto px-6">
+  <section id="services" className="relative py-28 ambient-glow">
+    <div className="container relative z-10 mx-auto px-6">
       <SectionHeading
         label="Услуги"
         title="Что мы делаем"
@@ -31,12 +32,16 @@ const ServicesSection = () => (
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {services.map((s, i) => (
           <AnimatedSection key={s.name} delay={i * 0.06}>
-            <div className="glass-surface glass-surface-hover group flex flex-col items-center gap-4 rounded-2xl p-6 text-center transition-all duration-300 hover:border-primary/20">
-              <div className="rounded-xl bg-primary/10 p-3 transition-colors duration-300 group-hover:bg-primary/20">
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="glass-surface group relative flex flex-col items-center gap-4 rounded-2xl p-6 text-center transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_-10px_hsl(0_78%_50%_/_0.2)]"
+            >
+              <div className="rounded-xl bg-primary/10 p-3 transition-all duration-300 group-hover:bg-primary/20 group-hover:shadow-[0_0_20px_-5px_hsl(0_78%_50%_/_0.3)]">
                 <s.icon className="h-6 w-6 text-primary transition-transform duration-300 group-hover:scale-110" />
               </div>
               <span className="font-body text-sm font-medium leading-tight">{s.name}</span>
-            </div>
+            </motion.div>
           </AnimatedSection>
         ))}
       </div>

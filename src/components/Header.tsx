@@ -30,8 +30,9 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-6">
-          <a href="#" className="font-display text-xl font-bold">
+          <a href="#" className="font-display text-xl font-bold tracking-wide">
             Good<span className="text-gradient-red">Avto</span>
+            <span className="ml-1.5 text-sm font-medium text-muted-foreground">Service</span>
           </a>
 
           {/* Desktop nav */}
@@ -47,7 +48,7 @@ const Header = () => {
             ))}
             <a
               href="tel:89831228588"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-body text-sm font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)]"
+              className="btn-glow inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 font-body text-sm font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)]"
             >
               <Phone className="h-4 w-4" />
               Звонок
