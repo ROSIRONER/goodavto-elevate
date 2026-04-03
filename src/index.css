@@ -46,8 +46,11 @@
     --gradient-red: linear-gradient(135deg, hsl(0, 78%, 50%), hsl(15, 90%, 55%));
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
-    --font-display: 'Oswald', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
+
+    --ambient-red: radial-gradient(ellipse 600px 400px at 20% 50%, hsl(0 78% 50% / 0.06), transparent);
+    --ambient-red-right: radial-gradient(ellipse 500px 500px at 80% 30%, hsl(0 78% 50% / 0.04), transparent);
   }
 }
 
