@@ -14,7 +14,7 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         href="tel:89831228588"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`inline-flex items-center gap-2.5 rounded-lg bg-primary font-body font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)] ${
+        className={`btn-glow inline-flex items-center gap-2.5 rounded-lg bg-primary font-body font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)] ${
           isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"
         }`}
       >
@@ -27,7 +27,7 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`glass-surface glass-surface-hover inline-flex items-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-colors ${
+        className={`glass-surface glass-surface-hover inline-flex items-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 ${
           isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"
         }`}
       >
@@ -40,7 +40,7 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`glass-surface glass-surface-hover inline-flex items-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-colors ${
+        className={`glass-surface glass-surface-hover inline-flex items-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 ${
           isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"
         }`}
       >

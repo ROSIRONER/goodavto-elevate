@@ -13,8 +13,9 @@ const Footer = () => (
       <div className="grid gap-10 md:grid-cols-3">
         {/* Brand */}
         <div>
-          <div className="font-display text-2xl font-bold">
+          <div className="font-display text-2xl font-bold tracking-wide">
             Good<span className="text-gradient-red">Avto</span>
+            <span className="ml-1.5 text-lg font-medium text-muted-foreground">Service</span>
           </div>
           <p className="mt-3 font-body text-sm text-muted-foreground">
             Автосервис полного цикла в Новосибирске.
@@ -36,7 +37,7 @@ const Footer = () => (
 
         {/* Nav */}
         <div>
-          <div className="mb-3 font-body text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-3 font-display text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Навигация
           </div>
           <nav className="flex flex-col gap-2">
@@ -54,7 +55,7 @@ const Footer = () => (
 
         {/* Legal */}
         <div>
-          <div className="mb-3 font-body text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-3 font-display text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Документы
           </div>
           <nav className="flex flex-col gap-2">
@@ -81,7 +82,7 @@ const Footer = () => (
           href="https://voidstudiorus.ru/"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-body text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          className="font-display text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground transition-colors hover:text-foreground"
         >
           Created by Void Studio
         </a>
