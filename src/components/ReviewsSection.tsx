@@ -1,0 +1,66 @@
+import { Star } from "lucide-react";
+import AnimatedSection from "./AnimatedSection";
+import SectionHeading from "./SectionHeading";
+
+const reviews = [
+  {
+    name: "Наталья",
+    text: "Рекомендую! Это отличный автосервис! Ещё раз благодарю за ремонт моей машины! Мастера знающие и опытные! Буду обращаться ещё!",
+  },
+  {
+    name: "Ольга",
+    text: "Отличный автосервис. Ребята молодцы! Всё объяснили, показали. Сделали всё очень быстро! Теперь будем обращаться только сюда. Рекомендую 👍",
+  },
+  {
+    name: "Иван",
+    text: "Отличный сервис! Без проблем поменяли моторное масло, фильтры и свечи зажигания в день обращения 👍 Всем рекомендую!",
+  },
+  {
+    name: "Виталий",
+    text: "Перегревался автомобиль, думал замена термостата. Обратился к ребятам, промыли радиаторы — проблема ушла. Лишних работ не навязали, всё объяснили. Сделали за 40 минут. Спасибо, советую!",
+  },
+];
+
+const Stars = () => (
+  <div className="mb-4 flex gap-1">
+    {[...Array(5)].map((_, i) => (
+      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+    ))}
+  </div>
+);
+
+const ReviewsSection = () => (
+  <section id="reviews" className="relative py-28">
+    <div className="container mx-auto px-6">
+      <SectionHeading
+        label="Отзывы"
+        title="Нам доверяют"
+        subtitle="Реальные отзывы наших клиентов с 2ГИС"
+      />
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {reviews.map((r, i) => (
+          <AnimatedSection key={r.name} delay={i * 0.12}>
+            <div className="glass-surface flex h-full flex-col rounded-2xl p-8">
+              <Stars />
+              <p className="mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground">
+                «{r.text}»
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
+                  {r.name[0]}
+                </div>
+                <div>
+                  <div className="font-body text-sm font-semibold">{r.name}</div>
+                  <div className="font-body text-xs text-muted-foreground">2ГИС</div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+export default ReviewsSection;
