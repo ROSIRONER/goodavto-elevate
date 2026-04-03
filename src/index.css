@@ -95,6 +95,36 @@
     box-shadow: var(--shadow-glow);
   }
 
+  .ambient-glow {
+    position: relative;
+  }
+  .ambient-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ambient-red);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .btn-glow {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-glow::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: hsl(0 78% 50% / 0);
+    transition: background 0.3s ease;
+    z-index: -1;
+    filter: blur(12px);
+  }
+  .btn-glow:hover::after {
+    background: hsl(0 78% 50% / 0.3);
+  }
+
   .noise-overlay {
     position: relative;
   }
