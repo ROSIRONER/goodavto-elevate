@@ -56,8 +56,8 @@ const HeroSection = () => (
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mb-8 mt-6 max-w-lg font-body text-lg leading-relaxed text-muted-foreground md:text-xl"
         >
-          Качественный ремонт вашего автомобиля. Без лишних слов —
-          находим проблему, подбираем запчасти и делаем всё&nbsp;под&nbsp;ключ.
+          Качественный ремонт вашего автомобиля. Диагностика, подбор запчастей
+          и&nbsp;ремонт&nbsp;— всё берём на&nbsp;себя.
         </motion.p>
 
         <motion.div
