@@ -31,8 +31,7 @@ const Header = () => {
       >
         <div className="container mx-auto flex items-center justify-between px-6">
           <a href="#" className="font-display text-xl font-bold tracking-wide">
-            Good<span className="text-gradient-red">Avto</span>
-            <span className="ml-1.5 text-sm font-medium text-muted-foreground">Service</span>
+            Good<span className="text-gradient-red">Avto</span> Service
           </a>
 
           {/* Desktop nav */}

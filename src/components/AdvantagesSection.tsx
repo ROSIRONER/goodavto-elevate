@@ -17,9 +17,9 @@ const CountUpStat = ({ target, suffix, label }: { target: number; suffix: string
 
 const stats = [
   { target: 10, suffix: "+", label: "Лет опыта" },
-  { target: 0, suffix: "∞", label: "Гарантия на работы", isSymbol: true },
+  { target: 100, suffix: "%", label: "Гарантия на работы" },
   { target: 1, suffix: " день", label: "Срок большинства работ" },
-  { target: 100, suffix: "%", label: "Запчасти под ключ" },
+  { target: 500, suffix: "+", label: "Довольных клиентов" },
 ];
 
 const AdvantagesSection = () => (
@@ -33,16 +33,7 @@ const AdvantagesSection = () => (
       <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s, i) => (
           <AnimatedSection key={s.label} delay={i * 0.12}>
-            {s.isSymbol ? (
-              <div className="glass-surface rounded-2xl p-8 text-center">
-                <div className="font-display text-4xl font-bold text-gradient-red md:text-5xl">
-                  ∞
-                </div>
-                <div className="mt-3 font-body text-sm text-muted-foreground">{s.label}</div>
-              </div>
-            ) : (
-              <CountUpStat target={s.target} suffix={s.suffix} label={s.label} />
-            )}
+            <CountUpStat target={s.target} suffix={s.suffix} label={s.label} />
           </AnimatedSection>
         ))}
       </div>

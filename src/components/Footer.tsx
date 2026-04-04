@@ -14,8 +14,7 @@ const Footer = () => (
         {/* Brand */}
         <div>
           <div className="font-display text-2xl font-bold tracking-wide">
-            Good<span className="text-gradient-red">Avto</span>
-            <span className="ml-1.5 text-lg font-medium text-muted-foreground">Service</span>
+            Good<span className="text-gradient-red">Avto</span> Service
           </div>
           <p className="mt-3 font-body text-sm text-muted-foreground">
             Автосервис полного цикла в Новосибирске.

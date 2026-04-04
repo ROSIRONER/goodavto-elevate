@@ -47,9 +47,7 @@ const HeroSection = () => (
           transition={{ duration: 0.7, delay: 0.3 }}
           className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl"
         >
-          Good<span className="text-gradient-red">Avto</span>
-          <br />
-          Service
+          Good<span className="text-gradient-red">Avto</span> Service
         </motion.h1>
 
         <motion.p
@@ -58,8 +56,8 @@ const HeroSection = () => (
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mb-8 mt-6 max-w-lg font-body text-lg leading-relaxed text-muted-foreground md:text-xl"
         >
-          Качественный ремонт вашего автомобиля. Без лишних слов —
-          находим проблему, подбираем запчасти и делаем всё&nbsp;под&nbsp;ключ.
+          Качественный ремонт вашего автомобиля. Диагностика, подбор запчастей
+          и&nbsp;ремонт&nbsp;— всё берём на&nbsp;себя.
         </motion.p>
 
         <motion.div
