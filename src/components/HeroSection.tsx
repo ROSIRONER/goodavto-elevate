@@ -32,7 +32,7 @@ const HeroSection = () => (
         >
           <div className="h-px w-12 bg-primary" />
           <div className="flex items-center gap-3">
-            <span className="font-display text-xs font-medium uppercase tracking-[0.3em] text-primary">
+            <span className="font-label text-xs font-medium uppercase tracking-[0.3em] text-primary">
               Автосервис
             </span>
             <span className="inline-flex items-center rounded-full border border-primary/30 px-3 py-0.5 font-display text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
