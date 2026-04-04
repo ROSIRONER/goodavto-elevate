@@ -55,7 +55,7 @@ const Footer = () => (
 
         {/* Legal */}
         <div>
-          <div className="mb-3 font-display text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-3 font-label text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Документы
           </div>
           <nav className="flex flex-col gap-2">
