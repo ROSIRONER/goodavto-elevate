@@ -47,9 +47,7 @@ const HeroSection = () => (
           transition={{ duration: 0.7, delay: 0.3 }}
           className="font-display text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl lg:text-8xl"
         >
-          Good<span className="text-gradient-red">Avto</span>
-          <br />
-          Service
+          Good<span className="text-gradient-red">Avto</span> Service
         </motion.h1>
 
         <motion.p
