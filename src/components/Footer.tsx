@@ -8,7 +8,8 @@ const legalLinks = [
 ];
 
 const Footer = () => (
-  <footer className="border-t border-border py-14">
+  <footer className="relative border-t border-border py-14 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 400px at 95% 80%, hsl(0 78% 50% / 0.06), transparent)' }} />
     <div className="container mx-auto px-6">
       <div className="grid gap-10 md:grid-cols-3">
         {/* Brand */}
@@ -36,7 +37,7 @@ const Footer = () => (
 
         {/* Nav */}
         <div>
-          <div className="mb-3 font-display text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-3 font-label text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Навигация
           </div>
           <nav className="flex flex-col gap-2">
@@ -54,7 +55,7 @@ const Footer = () => (
 
         {/* Legal */}
         <div>
-          <div className="mb-3 font-display text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          <div className="mb-3 font-label text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Документы
           </div>
           <nav className="flex flex-col gap-2">

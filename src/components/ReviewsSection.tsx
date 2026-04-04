@@ -30,7 +30,8 @@ const Stars = () => (
 );
 
 const ReviewsSection = () => (
-  <section id="reviews" className="relative py-28">
+  <section id="reviews" className="relative py-28 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 500px 400px at 85% 40%, hsl(0 78% 50% / 0.04), transparent)' }} />
     <div className="container mx-auto px-6">
       <SectionHeading
         label="Отзывы"

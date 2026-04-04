@@ -39,7 +39,8 @@ const stats = [
 ];
 
 const AdvantagesSection = () => (
-  <section id="advantages" className="relative py-28">
+  <section id="advantages" className="relative py-28 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 400px at 90% 30%, hsl(0 78% 50% / 0.05), transparent)' }} />
     <div className="container mx-auto px-6">
       <SectionHeading
         label="Почему мы"
