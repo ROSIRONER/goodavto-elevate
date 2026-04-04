@@ -26,7 +26,6 @@ const Index = () => (
     <ContactsSection />
     <Footer />
   </div>
-  </div>
 );
 
 export default Index;
