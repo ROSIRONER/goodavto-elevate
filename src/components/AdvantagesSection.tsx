@@ -17,9 +17,9 @@ const CountUpStat = ({ target, suffix, label }: { target: number; suffix: string
 
 const stats = [
   { target: 10, suffix: "+", label: "Лет опыта" },
-  { target: 0, suffix: "∞", label: "Гарантия на работы", isSymbol: true },
+  { target: 100, suffix: "%", label: "Гарантия на работы" },
   { target: 1, suffix: " день", label: "Срок большинства работ" },
-  { target: 100, suffix: "%", label: "Запчасти под ключ" },
+  { target: 500, suffix: "+", label: "Довольных клиентов" },
 ];
 
 const AdvantagesSection = () => (
