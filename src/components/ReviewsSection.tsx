@@ -33,7 +33,7 @@ const twoGisUrl = "https://2gis.ru/novosibirsk/firm/70000001059883316";
 
 const ReviewsSection = () => (
   <section id="reviews" className="relative py-28 overflow-hidden">
-    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 500px 400px at 85% 40%, hsl(0 78% 50% / 0.04), transparent)' }} />
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 500px at 80% 30%, hsl(0 78% 50% / 0.06), transparent), radial-gradient(ellipse 500px 400px at 15% 70%, hsl(0 78% 50% / 0.03), transparent)' }} />
     <div className="container mx-auto px-6">
       <SectionHeading
         label="Отзывы"

@@ -9,12 +9,12 @@ const legalLinks = [
 
 const Footer = () => (
   <footer className="relative border-t border-border py-14 overflow-hidden">
-    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 400px at 95% 80%, hsl(0 78% 50% / 0.06), transparent)' }} />
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 700px 500px at 95% 90%, hsl(0 78% 50% / 0.08), transparent), radial-gradient(ellipse 400px 300px at 5% 20%, hsl(0 78% 50% / 0.03), transparent)' }} />
     <div className="container mx-auto px-6">
       <div className="grid gap-10 md:grid-cols-3">
         {/* Brand */}
         <div>
-          <div className="font-brand text-3xl font-bold uppercase tracking-wide">
+          <div className="font-display text-2xl font-bold tracking-wide">
             Good<span className="text-gradient-red">Avto</span> Service
           </div>
           <p className="mt-3 font-body text-sm text-muted-foreground">

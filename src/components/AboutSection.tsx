@@ -10,7 +10,7 @@ const values = [
 
 const AboutSection = () => (
   <section id="about" className="relative py-28 overflow-hidden">
-    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 500px 350px at 10% 60%, hsl(0 78% 50% / 0.04), transparent)' }} />
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 450px at 5% 70%, hsl(0 78% 50% / 0.06), transparent), radial-gradient(ellipse 400px 300px at 90% 20%, hsl(0 0% 100% / 0.02), transparent)' }} />
     <div className="container mx-auto px-6">
       <SectionHeading
         label="О нас"
