@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Teko:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Teko:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -46,7 +46,8 @@
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
     --font-display: 'Space Grotesk', sans-serif;
-    --font-label: 'Teko', sans-serif;
+    --font-brand: 'Teko', sans-serif;
+    --font-label: 'Syncopate', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     --ambient-red: radial-gradient(ellipse 600px 400px at 20% 50%, hsl(0 78% 50% / 0.06), transparent);
@@ -148,6 +149,10 @@
 
   .font-label {
     font-family: var(--font-label);
+  }
+
+  .font-brand {
+    font-family: var(--font-brand);
   }
 }
 

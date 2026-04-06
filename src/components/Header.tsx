@@ -30,7 +30,7 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto flex items-center justify-between px-6">
-          <a href="#" className="font-display text-xl font-bold tracking-wide">
+          <a href="#" className="font-brand text-2xl font-bold uppercase tracking-wide">
             Good<span className="text-gradient-red">Avto</span> Service
           </a>
 
