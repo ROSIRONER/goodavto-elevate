@@ -4,7 +4,8 @@ import CTAButtons from "./CTAButtons";
 import { MapPin, Clock, Phone, ExternalLink } from "lucide-react";
 
 const ContactsSection = () => (
-  <section id="contacts" className="relative py-28">
+  <section id="contacts" className="relative py-28 overflow-hidden">
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 600px 400px at 10% 40%, hsl(0 78% 50% / 0.05), transparent), radial-gradient(ellipse 500px 500px at 85% 80%, hsl(0 78% 50% / 0.04), transparent)' }} />
     <div className="container mx-auto px-6">
       <SectionHeading
         label="Контакты"
