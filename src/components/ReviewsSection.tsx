@@ -29,6 +29,8 @@ const Stars = () => (
   </div>
 );
 
+const twoGisUrl = "https://2gis.ru/novosibirsk/firm/70000001059883316";
+
 const ReviewsSection = () => (
   <section id="reviews" className="relative py-28 overflow-hidden">
     <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 500px 400px at 85% 40%, hsl(0 78% 50% / 0.04), transparent)' }} />
@@ -36,13 +38,30 @@ const ReviewsSection = () => (
       <SectionHeading
         label="Отзывы"
         title="Нам доверяют"
-        subtitle="Реальные отзывы наших клиентов с 2ГИС"
+        subtitle={
+          <>
+            Реальные отзывы наших клиентов с{" "}
+            <a
+              href={twoGisUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
+            >
+              2ГИС
+            </a>
+          </>
+        }
       />
 
       <div className="grid gap-6 md:grid-cols-2">
         {reviews.map((r, i) => (
           <AnimatedSection key={r.name} delay={i * 0.12}>
-            <div className="glass-surface flex h-full flex-col rounded-2xl p-8">
+            <a
+              href={twoGisUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-surface glass-surface-hover flex h-full flex-col rounded-2xl p-8 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.15)]"
+            >
               <Stars />
               <p className="mb-6 flex-1 font-body text-sm leading-relaxed text-muted-foreground">
                 «{r.text}»
@@ -56,7 +75,7 @@ const ReviewsSection = () => (
                   <div className="font-body text-xs text-muted-foreground">2ГИС</div>
                 </div>
               </div>
-            </div>
+            </a>
           </AnimatedSection>
         ))}
       </div>

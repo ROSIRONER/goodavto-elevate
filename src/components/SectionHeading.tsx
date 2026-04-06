@@ -3,7 +3,7 @@ import AnimatedSection from "./AnimatedSection";
 interface SectionHeadingProps {
   label: string;
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
 }
 
 const SectionHeading = ({ label, title, subtitle }: SectionHeadingProps) => (
