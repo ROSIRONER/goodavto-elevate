@@ -3,13 +3,11 @@ import { Phone, Send, MessageCircle } from "lucide-react";
 const legalLinks = [
   { label: "Политика конфиденциальности", href: "https://teletype.in/@mgrstate/goodavtopolicy" },
   { label: "Политика cookies", href: "https://teletype.in/@mgrstate/coockiegoodavto" },
-  { label: "Публичная оферта", href: "https://teletype.in/@mgrstate/ofertagoodavto" },
-  { label: "Пользовательское соглашение", href: "https://teletype.in/@mgrstate/polzgoodavto" },
 ];
 
 const Footer = () => (
   <footer className="relative border-t border-border py-14 overflow-hidden">
-    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 700px 500px at 95% 90%, hsl(0 78% 50% / 0.08), transparent), radial-gradient(ellipse 400px 300px at 5% 20%, hsl(0 78% 50% / 0.03), transparent)' }} />
+    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 960px 560px at 100% 100%, hsl(var(--primary) / 0.16), transparent 58%), radial-gradient(ellipse 420px 260px at 8% 18%, hsl(var(--foreground) / 0.03), transparent 70%)' }} />
     <div className="container mx-auto px-6">
       <div className="grid gap-10 md:grid-cols-3">
         {/* Brand */}
@@ -22,16 +20,17 @@ const Footer = () => (
             <br />
             Ежедневно с 10:00 до 20:00
           </p>
-          <div className="mt-4 flex gap-3">
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <a href="tel:89831228588" className="rounded-lg bg-primary/10 p-2 transition-colors hover:bg-primary/20">
               <Phone className="h-4 w-4 text-primary" />
             </a>
             <a href="https://t.me/+79831228588" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-primary/10 p-2 transition-colors hover:bg-primary/20">
               <Send className="h-4 w-4 text-primary" />
             </a>
-            <a href="https://max.me/+79831228588" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-primary/10 p-2 transition-colors hover:bg-primary/20">
-              <MessageCircle className="h-4 w-4 text-primary" />
-            </a>
+            <div className="inline-flex items-center gap-2 rounded-lg border border-border/70 bg-secondary/50 px-3 py-2 font-body text-xs text-muted-foreground">
+              <MessageCircle className="h-3.5 w-3.5 text-primary" />
+              Контакт в MAX
+            </div>
           </div>
         </div>
 
@@ -71,6 +70,9 @@ const Footer = () => (
               </a>
             ))}
           </nav>
+          <p className="mt-5 max-w-xs font-body text-xs leading-relaxed text-muted-foreground">
+            Информация на сайте не является публичной офертой (ст. 435, 437 ГК РФ).
+          </p>
         </div>
       </div>
 

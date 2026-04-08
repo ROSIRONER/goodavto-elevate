@@ -22,8 +22,7 @@ const services = [
 
 const ServicesSection = () => (
   <section id="services" className="relative py-28 overflow-hidden">
-    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 700px 500px at 80% 60%, hsl(0 78% 50% / 0.06), transparent), radial-gradient(ellipse 400px 400px at 5% 20%, hsl(0 0% 100% / 0.02), transparent)' }} />
-    <div className="container relative z-10 mx-auto px-6">
+    <div className="container mx-auto px-6">
       <SectionHeading
         label="Услуги"
         title="Что мы делаем"
