@@ -27,10 +27,10 @@ const Footer = () => (
             <a href="https://t.me/+79831228588" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-primary/10 p-2 transition-colors hover:bg-primary/20">
               <Send className="h-4 w-4 text-primary" />
             </a>
-            <div className="inline-flex items-center gap-2 rounded-lg border border-border/70 bg-secondary/50 px-3 py-2 font-body text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-2 font-body text-xs text-muted-foreground">
               <MessageCircle className="h-3.5 w-3.5 text-primary" />
-              Контакт в MAX
-            </div>
+              Мы есть в MAX · 8-983-122-85-88
+            </span>
           </div>
         </div>
 

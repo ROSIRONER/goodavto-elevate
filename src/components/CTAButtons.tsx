@@ -35,12 +35,14 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         Telegram
       </motion.a>
       <div
-        className={`inline-flex select-none items-center gap-2.5 rounded-lg border border-border/70 bg-secondary/40 font-body font-medium text-muted-foreground ${
-          isLg ? "px-7 py-4 text-base" : "px-5 py-3 text-sm"
+        className={`inline-flex select-none items-center gap-2 font-body text-muted-foreground ${
+          isLg ? "text-base" : "text-sm"
         }`}
       >
         <MessageCircle className={isLg ? "h-5 w-5 text-primary" : "h-4 w-4 text-primary"} />
-        Контакт в MAX
+        <span>Мы есть в MAX</span>
+        <span className="text-border">·</span>
+        <span>8-983-122-85-88</span>
       </div>
     </div>
   );

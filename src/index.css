@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@400;700&family=Teko:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -46,8 +46,8 @@
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
     --font-display: 'Space Grotesk', sans-serif;
-    --font-label: 'Syncopate', sans-serif;
-    --font-section-label: 'Teko', sans-serif;
+    --font-label: 'Unbounded', sans-serif;
+    --font-section-label: 'Unbounded', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     --ambient-red: radial-gradient(ellipse 600px 400px at 20% 50%, hsl(0 78% 50% / 0.06), transparent);
@@ -157,10 +157,12 @@
 
   .page-spotlights {
     background:
-      radial-gradient(ellipse 920px 540px at 12% 14%, hsl(var(--primary) / 0.13), transparent 62%),
-      radial-gradient(ellipse 760px 460px at 86% 32%, hsl(var(--primary) / 0.08), transparent 66%),
-      radial-gradient(ellipse 640px 380px at 18% 68%, hsl(var(--foreground) / 0.025), transparent 72%),
-      radial-gradient(ellipse 960px 560px at 100% 100%, hsl(var(--primary) / 0.14), transparent 60%);
+      radial-gradient(ellipse 1100px 700px at 8% 8%, hsl(var(--primary) / 0.18), transparent 58%),
+      radial-gradient(ellipse 900px 500px at 90% 25%, hsl(var(--primary) / 0.12), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 50% 50%, hsl(var(--primary) / 0.04), transparent 70%),
+      radial-gradient(ellipse 800px 400px at 15% 75%, hsl(var(--foreground) / 0.035), transparent 65%),
+      radial-gradient(ellipse 1200px 700px at 95% 90%, hsl(var(--primary) / 0.2), transparent 55%),
+      radial-gradient(ellipse 600px 400px at 60% 40%, hsl(var(--primary) / 0.06), transparent 70%);
   }
 
   .page-grain {
