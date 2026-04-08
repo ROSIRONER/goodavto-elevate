@@ -8,7 +8,7 @@ interface SectionHeadingProps {
 
 const SectionHeading = ({ label, title, subtitle }: SectionHeadingProps) => (
   <AnimatedSection className="mb-16 text-center">
-    <span className="mb-4 inline-block font-section-label text-base font-medium uppercase leading-none tracking-[0.18em] text-primary md:text-lg">
+    <span className="mb-4 inline-block font-section-label text-xs font-semibold uppercase leading-none tracking-[0.15em] text-primary md:text-sm">
       {label}
     </span>
     <h2 className="font-display text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">

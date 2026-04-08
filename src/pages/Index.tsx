@@ -12,11 +12,13 @@ const Index = () => (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       <div className="page-spotlights absolute inset-0" />
       <div className="page-grain absolute inset-0" />
-      <div className="noise-blob absolute -right-16 top-[8%] h-[420px] w-[420px] opacity-[0.05]" />
-      <div className="noise-blob absolute -left-24 top-[32%] h-[340px] w-[340px] opacity-[0.032]" />
-      <div className="noise-blob absolute right-[12%] top-[58%] h-[260px] w-[260px] opacity-[0.028]" />
-      <div className="noise-blob absolute left-[18%] bottom-[18%] h-[300px] w-[300px] opacity-[0.026]" />
-      <div className="noise-blob absolute -right-20 bottom-[-80px] h-[620px] w-[620px] opacity-[0.065]" />
+      <div className="noise-blob absolute -right-16 top-[8%] h-[520px] w-[520px] opacity-[0.06]" />
+      <div className="noise-blob absolute -left-24 top-[28%] h-[400px] w-[400px] opacity-[0.04]" />
+      <div className="noise-blob absolute right-[10%] top-[48%] h-[350px] w-[350px] opacity-[0.035]" />
+      <div className="noise-blob absolute left-[20%] top-[65%] h-[300px] w-[300px] opacity-[0.03]" />
+      <div className="noise-blob absolute right-[5%] top-[78%] h-[450px] w-[450px] opacity-[0.05]" />
+      <div className="noise-blob absolute -right-20 bottom-[-80px] h-[700px] w-[700px] opacity-[0.08]" />
+      <div className="noise-blob absolute left-[40%] top-[15%] h-[280px] w-[280px] opacity-[0.025]" />
     </div>
 
     <Header />

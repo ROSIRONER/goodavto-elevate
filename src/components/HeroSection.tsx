@@ -28,17 +28,11 @@ const HeroSection = () => (
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-6 flex items-center gap-4"
+          className="mb-6"
         >
-          <div className="h-px w-12 bg-primary" />
-          <div className="flex items-center gap-3">
-            <span className="font-label text-xs font-medium uppercase tracking-[0.3em] text-primary">
-              Автосервис
-            </span>
-            <span className="inline-flex items-center rounded-full border border-primary/30 px-3 py-0.5 font-label text-[10px] font-medium uppercase tracking-[0.2em] text-primary">
-              Новосибирск
-            </span>
-          </div>
+          <span className="font-section-label text-sm font-medium uppercase tracking-[0.15em] text-primary md:text-base">
+            Автосервис Новосибирск
+          </span>
         </motion.div>
 
         <motion.h1
