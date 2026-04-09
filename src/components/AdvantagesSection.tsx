@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
 import CTAButtons from "./CTAButtons";
@@ -7,11 +8,11 @@ import { Shield, Zap, Wrench, Award } from "lucide-react";
 const CountUpStat = ({ target, suffix, label, icon: Icon }: { target: number; suffix: string; label: string; icon: React.ElementType }) => {
   const { value, ref } = useCountUp(target);
   return (
-    <div ref={ref} className="glass-surface flex h-full flex-col items-center justify-center rounded-2xl p-8 text-center">
+    <div ref={ref} className="glass-surface flex h-full min-h-[220px] flex-col items-center justify-center rounded-2xl p-8 text-center">
       <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3">
         <Icon className="h-6 w-6 text-primary" />
       </div>
-      <div className="font-display text-4xl font-bold text-gradient-red md:text-5xl">
+      <div className="font-display text-3xl font-bold text-gradient-red md:text-4xl">
         {value}{suffix}
       </div>
       <div className="mt-3 font-body text-sm text-muted-foreground">{label}</div>
@@ -20,11 +21,11 @@ const CountUpStat = ({ target, suffix, label, icon: Icon }: { target: number; su
 };
 
 const TextStat = ({ label, text, icon: Icon }: { label: string; text: string; icon: React.ElementType }) => (
-  <div className="glass-surface flex h-full flex-col items-center justify-center rounded-2xl p-8 text-center">
+  <div className="glass-surface flex h-full min-h-[220px] flex-col items-center justify-center rounded-2xl p-8 text-center">
     <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3">
       <Icon className="h-6 w-6 text-primary" />
     </div>
-    <div className="font-display text-2xl font-bold text-gradient-red md:text-3xl">
+    <div className="font-display text-3xl font-bold text-gradient-red md:text-4xl">
       {text}
     </div>
     <div className="mt-3 font-body text-sm text-muted-foreground">{label}</div>
@@ -46,14 +47,20 @@ const AdvantagesSection = () => (
         title="Преимущества"
       />
 
-      <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-16 grid grid-cols-2 gap-6 lg:grid-cols-4">
         {stats.map((s, i) => (
           <AnimatedSection key={s.label} delay={i * 0.12}>
-            {'target' in s ? (
-              <CountUpStat target={s.target!} suffix={s.suffix!} label={s.label} icon={s.icon} />
-            ) : (
-              <TextStat text={s.text!} label={s.label} icon={s.icon} />
-            )}
+            <motion.div
+              whileHover={{ y: -4, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="h-full"
+            >
+              {'target' in s ? (
+                <CountUpStat target={s.target!} suffix={s.suffix!} label={s.label} icon={s.icon} />
+              ) : (
+                <TextStat text={s.text!} label={s.label} icon={s.icon} />
+              )}
+            </motion.div>
           </AnimatedSection>
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
@@ -55,10 +56,12 @@ const ReviewsSection = () => (
       <div className="grid gap-6 md:grid-cols-2">
         {reviews.map((r, i) => (
           <AnimatedSection key={r.name} delay={i * 0.12}>
-            <a
+            <motion.a
               href={twoGisUrl}
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className="glass-surface glass-surface-hover flex h-full flex-col rounded-2xl p-8 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_30px_-10px_hsl(var(--primary)/0.15)]"
             >
               <Stars />
@@ -74,7 +77,7 @@ const ReviewsSection = () => (
                   <div className="font-body text-xs text-muted-foreground">2ГИС</div>
                 </div>
               </div>
-            </a>
+            </motion.a>
           </AnimatedSection>
         ))}
       </div>
