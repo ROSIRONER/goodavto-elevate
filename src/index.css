@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Russo+One&family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -45,7 +45,7 @@
     --gradient-red: linear-gradient(135deg, hsl(0, 78%, 50%), hsl(15, 90%, 55%));
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
-    --font-display: 'Space Grotesk', sans-serif;
+    --font-display: 'Russo One', sans-serif;
     --font-label: 'Unbounded', sans-serif;
     --font-section-label: 'Unbounded', sans-serif;
     --font-body: 'Inter', sans-serif;
