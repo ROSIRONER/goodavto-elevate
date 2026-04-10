@@ -156,6 +156,10 @@
     font-family: var(--font-section-label);
   }
 
+  .font-logo {
+    font-family: var(--font-logo);
+  }
+
   .page-spotlights {
     background:
       radial-gradient(ellipse 1200px 800px at 5% 5%, hsl(0 78% 50% / 0.28), transparent 55%),
