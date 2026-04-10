@@ -45,7 +45,8 @@
     --gradient-red: linear-gradient(135deg, hsl(0, 78%, 50%), hsl(15, 90%, 55%));
     --shadow-glow: 0 0 40px -10px hsl(0, 78%, 50%, 0.4);
 
-    --font-display: 'Russo One', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-logo: 'Russo One', sans-serif;
     --font-label: 'Unbounded', sans-serif;
     --font-section-label: 'Unbounded', sans-serif;
     --font-body: 'Inter', sans-serif;
