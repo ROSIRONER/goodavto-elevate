@@ -52,7 +52,7 @@ const ContactsSection = () => (
 
             <div className="flex flex-wrap gap-3 border-t border-border pt-6">
               <a
-                href="https://yandex.ru/maps/?text=Новосибирск+ул+Мира+62В"
+                href="https://yandex.ru/maps/org/goodavto/75833825575/?from=mapframe&ll=82.940480%2C54.956875&z=17"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-surface glass-surface-hover inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-body text-xs font-medium transition-colors"
