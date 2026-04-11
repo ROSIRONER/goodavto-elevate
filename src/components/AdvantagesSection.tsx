@@ -8,27 +8,31 @@ import { Shield, Zap, Wrench, Award } from "lucide-react";
 const CountUpStat = ({ target, suffix, label, icon: Icon }: { target: number; suffix: string; label: string; icon: React.ElementType }) => {
   const { value, ref } = useCountUp(target);
   return (
-    <div ref={ref} className="glass-surface flex h-full min-h-[200px] flex-col items-center rounded-2xl p-6 pt-8 text-center">
+    <div ref={ref} className="glass-surface flex h-full min-h-[220px] flex-col items-center rounded-2xl p-6 pt-8 text-center">
       <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3">
         <Icon className="h-6 w-6 text-primary" />
       </div>
-      <div className="font-display text-2xl font-bold text-gradient-red md:text-3xl">
-        {value}{suffix}
+      <div className="flex min-h-[42px] items-center">
+        <div className="font-display text-2xl font-bold text-gradient-red md:text-3xl">
+          {value}{suffix}
+        </div>
       </div>
-      <div className="mt-auto pt-3 font-body text-xs leading-snug text-muted-foreground md:text-sm">{label}</div>
+      <div className="mt-auto flex min-h-[40px] items-center pt-3 font-body text-xs leading-snug text-muted-foreground md:text-sm">{label}</div>
     </div>
   );
 };
 
 const TextStat = ({ label, text, icon: Icon }: { label: string; text: string; icon: React.ElementType }) => (
-  <div className="glass-surface flex h-full min-h-[200px] flex-col items-center rounded-2xl p-6 pt-8 text-center">
+  <div className="glass-surface flex h-full min-h-[220px] flex-col items-center rounded-2xl p-6 pt-8 text-center">
     <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3">
       <Icon className="h-6 w-6 text-primary" />
     </div>
-    <div className="font-display text-2xl font-bold text-gradient-red md:text-3xl">
-      {text}
+    <div className="flex min-h-[42px] items-center">
+      <div className="font-display text-2xl font-bold text-gradient-red md:text-3xl">
+        {text}
+      </div>
     </div>
-    <div className="mt-auto pt-3 font-body text-xs leading-snug text-muted-foreground md:text-sm">{label}</div>
+    <div className="mt-auto flex min-h-[40px] items-center pt-3 font-body text-xs leading-snug text-muted-foreground md:text-sm">{label}</div>
   </div>
 );
 
