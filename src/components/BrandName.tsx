@@ -5,8 +5,7 @@ interface BrandNameProps {
 
 const BrandName = ({ className = "", stacked = false }: BrandNameProps) => (
   <span
-    className={`font-brand inline-flex font-black uppercase tracking-[0.01em] ${stacked ? "flex-col items-start leading-[0.9]" : "items-center gap-1 leading-none whitespace-nowrap"} ${className}`}
-    style={{ transform: "skewX(-10deg)" }}
+    className={`font-brand inline-flex font-black tracking-[0.01em] ${stacked ? "flex-col items-start leading-[0.9]" : "items-center gap-1 leading-none whitespace-nowrap"} ${className}`}
   >
     <span>
       <span className="text-primary">Good</span>
