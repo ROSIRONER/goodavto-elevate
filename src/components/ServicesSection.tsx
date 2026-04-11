@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import AnimatedSection from "./AnimatedSection";
 import SectionHeading from "./SectionHeading";
+import CTAButtons from "./CTAButtons";
 import {
   Settings, Cog, Thermometer, Droplets,
   ClipboardCheck, Disc, Wind, Snowflake,
@@ -64,6 +65,9 @@ const ServicesSection = () => {
               Свяжитесь с нами — быстро рассчитаем точную цену и подскажем по срокам.
             </DialogDescription>
           </DialogHeader>
+          <div className="pt-2">
+            <CTAButtons />
+          </div>
         </DialogContent>
       </Dialog>
     </section>
