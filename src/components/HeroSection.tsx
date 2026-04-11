@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 import CTAButtons from "./CTAButtons";
 import { MapPin, Clock } from "lucide-react";
-import BrandName from "./BrandName";
 
 const HeroSection = () => (
   <section className="relative flex min-h-screen items-center overflow-hidden">
@@ -40,8 +39,10 @@ const HeroSection = () => (
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
+          className="font-logo text-5xl font-bold uppercase leading-[0.95] tracking-[0.04em] md:text-7xl lg:text-8xl"
+          style={{ transform: 'skewX(-12deg)', display: 'inline-block' }}
         >
-          <BrandName className="text-5xl md:text-7xl lg:text-8xl" />
+          Good<span className="text-gradient-red">Avto</span> Service
         </motion.h1>
 
         <motion.p
