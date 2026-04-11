@@ -1,4 +1,5 @@
 import { Phone, Send, MessageCircle } from "lucide-react";
+import BrandName from "./BrandName";
 
 const legalLinks = [
   { label: "Политика конфиденциальности", href: "https://teletype.in/@mgrstate/goodavtopolicy" },
@@ -12,9 +13,7 @@ const Footer = () => (
       <div className="grid gap-10 md:grid-cols-3">
         {/* Brand */}
         <div>
-          <div className="font-logo text-2xl font-bold uppercase tracking-[0.06em]" style={{ transform: 'skewX(-12deg)', display: 'inline-block' }}>
-            Good<span className="text-gradient-red">Avto</span> Service
-          </div>
+          <BrandName className="text-2xl" />
           <p className="mt-3 font-body text-sm text-muted-foreground">
             Автосервис полного цикла в Новосибирске.
             <br />
