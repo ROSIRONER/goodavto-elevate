@@ -33,7 +33,7 @@ const Header = () => {
       >
         <div className="container mx-auto flex items-center justify-between px-6">
           <a href="#" className="flex items-center gap-2">
-            <img src={logo} alt="GoodAvto Service" className="h-10 w-auto" />
+            <img src={logo} alt="GoodAvto Service" className="h-10 w-auto rounded-md" />
             <BrandName className="text-xl" />
           </a>
 
