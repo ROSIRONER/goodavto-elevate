@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
-import BrandName from "./BrandName";
 
 const navItems = [
   { label: "О нас", href: "#about" },
@@ -34,7 +33,9 @@ const Header = () => {
         <div className="container mx-auto flex items-center justify-between px-6">
           <a href="#" className="flex items-center gap-2">
             <img src={logo} alt="GoodAvto Service" className="h-10 w-auto" />
-            <BrandName className="text-xl" />
+            <span className="font-logo text-xl font-bold uppercase tracking-[0.06em]" style={{ transform: 'skewX(-12deg)', display: 'inline-block' }}>
+              Good<span className="text-gradient-red">Avto</span> Service
+            </span>
           </a>
 
           {/* Desktop nav */}
