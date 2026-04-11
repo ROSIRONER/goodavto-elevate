@@ -190,6 +190,17 @@
     mix-blend-mode: soft-light;
     opacity: 0.14;
   }
+
+  @media (max-width: 768px) {
+    .glass-surface {
+      backdrop-filter: blur(12px);
+    }
+
+    .page-grain {
+      opacity: 0.08;
+      background-size: 320px 320px;
+    }
+  }
 }
 
 /* Smooth scroll */

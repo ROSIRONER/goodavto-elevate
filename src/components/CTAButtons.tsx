@@ -9,12 +9,12 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
   const isLg = size === "lg";
 
   return (
-    <div className="flex flex-wrap gap-3 w-full">
+    <div className="flex w-full flex-col gap-3 sm:flex-row">
       <motion.a
         href="tel:89831228588"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`btn-glow inline-flex items-center justify-center gap-2.5 rounded-lg bg-primary font-body font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)] flex-1 min-w-0 ${
+        className={`btn-glow inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg bg-primary font-body font-semibold text-primary-foreground transition-shadow hover:shadow-[var(--shadow-glow)] w-full sm:flex-1 ${
           isLg ? "px-7 py-4 text-base" : "px-4 py-3 text-sm"
         }`}
       >
@@ -27,7 +27,7 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`glass-surface glass-surface-hover inline-flex items-center justify-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 flex-1 min-w-0 ${
+        className={`glass-surface glass-surface-hover inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 w-full sm:flex-1 ${
           isLg ? "px-7 py-4 text-base" : "px-4 py-3 text-sm"
         }`}
       >
@@ -40,7 +40,7 @@ const CTAButtons = ({ size = "default" }: CTAButtonsProps) => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
-        className={`glass-surface glass-surface-hover inline-flex items-center justify-center gap-2.5 rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 flex-1 min-w-0 ${
+        className={`glass-surface glass-surface-hover inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg font-body font-medium text-foreground transition-all duration-300 hover:border-primary/20 w-full sm:flex-1 ${
           isLg ? "px-7 py-4 text-base" : "px-4 py-3 text-sm"
         }`}
       >
