@@ -78,7 +78,7 @@ const ContactsSection = () => (
           <div className="h-full min-h-[400px] overflow-hidden rounded-2xl border border-border">
             <iframe
               title="GoodAvto Service на карте"
-              src="https://yandex.ru/map-widget/v1/?ll=82.940480%2C54.956875&z=17&from=mapframe&um=constructor%3A&source=constructor&pt=82.940480,54.956875,pm2rdm"
+              src="https://yandex.ru/map-widget/v1/?um=constructor%3Aec0311f53b8f2d39d26226101c1debb383881d3fed2893b59174459adc6a87c1"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 400, filter: "invert(0.9) hue-rotate(180deg) brightness(0.9) contrast(1.1)" }}
