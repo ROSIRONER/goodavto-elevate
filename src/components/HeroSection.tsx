@@ -41,7 +41,7 @@ const HeroSection = () => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          <BrandName stacked className="text-5xl md:text-7xl lg:text-8xl" />
+          <BrandName className="text-5xl md:text-7xl lg:text-8xl" />
         </motion.h1>
 
         <motion.p

@@ -26,7 +26,7 @@ const ServicesSection = () => (
       <SectionHeading
         label="Услуги"
         title="Что мы делаем"
-        subtitle="Полный спектр услуг по ремонту и обслуживанию автомобилей"
+        subtitle="Работаем со всеми видами легкового транспорта, а также обслуживаем легкий коммерческий транспорт"
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
