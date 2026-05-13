@@ -38,10 +38,10 @@ const Footer = () => (
             Навигация
           </div>
           <nav className="flex flex-col gap-2">
-            {["О нас", "Услуги", "Преимущества", "Отзывы", "Контакты"].map((item) => (
+            {["О нас", "Услуги", "AI диагностика", "Преимущества", "Отзывы", "Контакты"].map((item) => (
               <a
                 key={item}
-                href={`#${item === "О нас" ? "about" : item === "Услуги" ? "services" : item === "Преимущества" ? "advantages" : item === "Отзывы" ? "reviews" : "contacts"}`}
+                href={`#${item === "О нас" ? "about" : item === "Услуги" ? "services" : item === "AI диагностика" ? "ai-diagnostics" : item === "Преимущества" ? "advantages" : item === "Отзывы" ? "reviews" : "contacts"}`}
                 className="font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item}

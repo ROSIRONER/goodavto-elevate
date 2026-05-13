@@ -7,6 +7,7 @@ import BrandName from "./BrandName";
 const navItems = [
   { label: "О нас", href: "#about" },
   { label: "Услуги", href: "#services" },
+  { label: "AI диагностика", href: "#ai-diagnostics" },
   { label: "Отзывы", href: "#reviews" },
   { label: "Контакты", href: "#contacts" },
 ];
