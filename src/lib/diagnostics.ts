@@ -15,6 +15,21 @@ export interface DiagnosticInput {
   model?: string;
 }
 
+export interface DiagnosticHypothesis {
+  probableIssue: string;
+  affectedSystem: string;
+  confidence: number;
+  dangerLevel: DangerLevel;
+  suggestedServiceCategory: ServiceCategory;
+  evidence: string[];
+}
+
+export interface DiagnosticExplanation {
+  summary: string;
+  evidence: string[];
+  scoringFactors: string[];
+}
+
 export interface DiagnosticResult {
   probableIssue: string;
   possibleCauses: string[];
@@ -24,7 +39,8 @@ export interface DiagnosticResult {
   confidence: number;
   affectedSystem: string;
   matchedSymptoms: string[];
-  secondaryFindings: string[];
+  secondaryHypotheses: DiagnosticHypothesis[];
+  explanation: DiagnosticExplanation;
   urgencyAdvice: string;
 }
 
@@ -92,6 +108,9 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["троит", "чек"], boost: 5, finding: "Связка «троит + Check Engine» усиливает вероятность пропусков зажигания" },
       { terms: ["не тянет", "обороты"], boost: 3, finding: "Потеря тяги вместе с нестабильными оборотами указывает на проблему смеси или зажигания" },
+      { terms: ["троит", "вибрация"], boost: 4, finding: "Вибрация вместе с троением усиливает гипотезу по зажиганию или форсункам" },
+      { terms: ["check", "потеря тяги"], boost: 4, finding: "Check Engine и потеря тяги требуют считывания ошибок двигателя" },
+      { terms: ["дым", "троит"], boost: 3, finding: "Дым и нестабильная работа двигателя могут указывать на смесь, зажигание или компрессию" },
     ],
   },
   {
@@ -126,6 +145,8 @@ const diagnosticRules: DiagnosticRule[] = [
       { terms: ["хруст", "поворот"], boost: 6, finding: "Хруст при повороте характерен для наружного ШРУСа" },
       { terms: ["вибрация", "разгон"], boost: 4, finding: "Вибрация при разгоне может указывать на внутренний ШРУС или привод" },
       { terms: ["стук", "кочка"], boost: 3, finding: "Стук на неровностях усиливает вероятность износа подвески" },
+      { terms: ["стук", "поворот"], boost: 4, finding: "Стук при повороте требует проверки рулевых элементов и опор" },
+      { terms: ["гул", "подшипник"], boost: 4, finding: "Гул вместе с признаком подшипника указывает на ступичный узел" },
     ],
   },
   {
@@ -159,6 +180,8 @@ const diagnosticRules: DiagnosticRule[] = [
       { terms: ["тормоз", "биение"], boost: 5, finding: "Биение при торможении часто связано с деформацией тормозных дисков" },
       { terms: ["педаль", "провал"], boost: 7, finding: "Провал педали требует немедленной проверки гидравлики" },
       { terms: ["abs", "тормоз"], boost: 4, finding: "Индикатор ABS указывает на необходимость компьютерной диагностики тормозной системы" },
+      { terms: ["скрип", "колод"], boost: 4, finding: "Скрип и упоминание колодок указывают на износ фрикционных элементов" },
+      { terms: ["тормоз", "уводит"], boost: 4, finding: "Увод при торможении может быть связан с суппортом или разной эффективностью тормозов" },
     ],
   },
   {
@@ -191,6 +214,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["руль", "люфт"], boost: 5, finding: "Люфт руля требует проверки рулевых наконечников и рейки" },
       { terms: ["руль", "тяжело"], boost: 4, finding: "Тяжёлый руль может указывать на неисправность усилителя" },
+      { terms: ["руль", "закусывает"], boost: 7, finding: "Закусывание руля является критичным признаком рулевого управления" },
+      { terms: ["уводит", "тянет в сторону"], boost: 3, finding: "Увод автомобиля требует проверки рулевого управления и углов установки колёс" },
     ],
   },
   {
@@ -224,6 +249,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["акпп", "пинается"], boost: 6, finding: "Пинки АКПП указывают на необходимость проверки жидкости и адаптаций" },
       { terms: ["передач", "не переключ"], boost: 5, finding: "Проблема переключения передач требует диагностики трансмиссии" },
+      { terms: ["рывок", "переключ"], boost: 4, finding: "Рывки при переключении указывают на трансмиссионную адаптацию, масло или опоры" },
+      { terms: ["сцеплен", "пробуксов"], boost: 5, finding: "Пробуксовка сцепления требует проверки диска и корзины сцепления" },
     ],
   },
   {
@@ -257,6 +284,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["лампа аккумулятора", "заряд"], boost: 6, finding: "Индикатор заряда часто связан с генератором или ремнём привода" },
       { terms: ["не завод", "аккумулятор"], boost: 4, finding: "Отказ запуска вместе с признаками АКБ указывает на систему питания стартера" },
+      { terms: ["моргает", "прибор"], boost: 3, finding: "Мерцание приборов часто связано с напряжением бортовой сети" },
+      { terms: ["генератор", "заряд"], boost: 5, finding: "Генератор и заряд в симптомах усиливают электрическую гипотезу" },
     ],
   },
   {
@@ -289,6 +318,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["перегрев", "антифриз"], boost: 5, finding: "Перегрев и потеря антифриза указывают на утечку или нарушение циркуляции" },
       { terms: ["температура", "вентилятор"], boost: 4, finding: "Рост температуры вместе с вентилятором требует проверки цепи охлаждения" },
+      { terms: ["кипит", "пар"], boost: 7, finding: "Кипение и пар — критичный признак перегрева системы охлаждения" },
+      { terms: ["радиатор", "антифриз"], boost: 4, finding: "Радиатор и антифриз в симптомах указывают на контур охлаждения" },
     ],
   },
   {
@@ -321,6 +352,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["рывки", "провал"], boost: 4, finding: "Рывки и провалы под нагрузкой часто связаны с подачей топлива" },
       { terms: ["запах бенз", "расход"], boost: 4, finding: "Запах топлива и расход требуют проверки герметичности топливной системы" },
+      { terms: ["бензонасос", "не завод"], boost: 5, finding: "Бензонасос и отказ запуска указывают на проверку давления топлива" },
+      { terms: ["форсунк", "троит"], boost: 4, finding: "Форсунки и троение двигателя указывают на качество распыла и топливоподачу" },
     ],
   },
   {
@@ -354,6 +387,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["дым", "масло"], boost: 5, finding: "Дым вместе с расходом масла усиливает вероятность износа двигателя" },
       { terms: ["белый", "антифриз"], boost: 6, finding: "Белый дым и уход антифриза требуют проверки герметичности двигателя" },
+      { terms: ["черный", "расход"], boost: 4, finding: "Чёрный дым и расход топлива указывают на переобогащение смеси" },
+      { terms: ["запах гари", "дым"], boost: 6, finding: "Запах гари и дым требуют срочного осмотра двигателя и выпуска" },
     ],
   },
   {
@@ -386,6 +421,8 @@ const diagnosticRules: DiagnosticRule[] = [
     combinations: [
       { terms: ["щелкает", "не завод"], boost: 5, finding: "Щелчки при запуске часто связаны с АКБ, стартером или контактами" },
       { terms: ["крутит", "не схватывает"], boost: 5, finding: "Стартер крутит, но двигатель не запускается — нужно проверить топливо и искру" },
+      { terms: ["утром", "не завод"], boost: 3, finding: "Проблемы утром часто связаны с АКБ, топливом или датчиками температуры" },
+      { terms: ["иммобилайзер", "не запуска"], boost: 4, finding: "Иммобилайзер и отказ запуска требуют проверки доступа и ошибок блока" },
     ],
   },
   {
@@ -521,7 +558,7 @@ const diagnosticRules: DiagnosticRule[] = [
   },
 ];
 
-const fallbackResult: Omit<DiagnosticResult, "confidence" | "matchedSymptoms" | "secondaryFindings"> = {
+const fallbackResult: Omit<DiagnosticResult, "confidence" | "matchedSymptoms" | "secondaryHypotheses" | "explanation"> = {
   probableIssue: "Требуется первичная комплексная диагностика",
   affectedSystem: "Несколько систем автомобиля",
   possibleCauses: [
@@ -550,6 +587,14 @@ const criticalTerms = [
   "дым из под капота",
   "запах гари",
   "закусывает руль",
+  "нет тормозов",
+  "отказ тормозов",
+  "педаль провалилась",
+  "горит масло",
+  "лампа масла",
+  "сильный перегрев",
+  "пожар",
+  "едкий дым",
 ];
 
 const normalize = (value: string) => value.toLowerCase().replace(/ё/g, "е").trim();
@@ -587,10 +632,34 @@ const toDangerLevel = (base: number, text: string, score: number): DangerLevel =
 const calculateConfidence = (best: ScoredRule, second?: ScoredRule) => {
   const coverage = best.maxScore > 0 ? best.score / best.maxScore : 0;
   const separation = second ? Math.max(0, best.score - second.score) : best.score;
-  const rawConfidence = 44 + coverage * 38 + Math.min(18, separation * 2.5);
+  const matchedSymptomFactor = Math.min(18, best.matchedSymptoms.length * 3);
+  const combinationFactor = Math.min(20, best.comboFindings.length * 6);
+  const importanceFactor = Math.min(14, best.score * 0.8);
+  const separationFactor = Math.min(16, separation * 2.2);
+  const rawConfidence = 34 + coverage * 20 + matchedSymptomFactor + combinationFactor + importanceFactor + separationFactor;
 
-  return Math.round(Math.max(42, Math.min(94, rawConfidence)));
+  return Math.round(Math.max(42, Math.min(96, rawConfidence)));
 };
+
+const toHypothesis = (scoredRule: ScoredRule, second?: ScoredRule): DiagnosticHypothesis => ({
+  probableIssue: scoredRule.rule.probableIssue,
+  affectedSystem: scoredRule.rule.affectedSystem,
+  confidence: calculateConfidence(scoredRule, second),
+  dangerLevel: toDangerLevel(scoredRule.rule.dangerBase, "", scoredRule.score),
+  suggestedServiceCategory: scoredRule.rule.suggestedServiceCategory,
+  evidence: unique([...scoredRule.matchedSymptoms, ...scoredRule.comboFindings]).slice(0, 4),
+});
+
+const buildExplanation = (best: ScoredRule, second?: ScoredRule): DiagnosticExplanation => ({
+  summary: `Диагноз выбран как наиболее вероятный по системе «${best.rule.affectedSystem}»: совпало ${best.matchedSymptoms.length} симптомов и ${best.comboFindings.length} диагностических комбинаций.`,
+  evidence: unique([...best.matchedSymptoms, ...best.comboFindings]).slice(0, 6),
+  scoringFactors: [
+    `Суммарный вес совпадений: ${best.score}`,
+    `Важность совпавших симптомов учтена через весовые коэффициенты`,
+    `Комбинационные признаки: ${best.comboFindings.length}`,
+    second ? `Отрыв от ближайшей гипотезы: ${Math.max(0, best.score - second.score)} балл(ов)` : "Конкурирующих гипотез с близким весом не найдено",
+  ],
+});
 
 export const analyzeVehicleSymptoms = async ({
   symptoms,
@@ -603,7 +672,6 @@ export const analyzeVehicleSymptoms = async ({
 
   const rankedRules = diagnosticRules
     .map((rule) => scoreRule(normalizedSymptoms, rule))
-    .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score);
 
   const bestMatch = rankedRules[0];
@@ -613,14 +681,18 @@ export const analyzeVehicleSymptoms = async ({
       ...fallbackResult,
       confidence: 42,
       matchedSymptoms: [],
-      secondaryFindings: [],
+      secondaryHypotheses: [],
+      explanation: {
+        summary: "Симптомов недостаточно для уверенного сопоставления с экспертными правилами.",
+        evidence: [],
+        scoringFactors: ["Недостаточное количество совпавших диагностических признаков"],
+      },
     };
   }
 
-  const secondaryFindings = rankedRules
+  const secondaryHypotheses = rankedRules
     .slice(1, 4)
-    .filter(({ score }) => score >= Math.max(4, bestMatch.score * 0.45))
-    .map(({ rule }) => `${rule.affectedSystem}: ${rule.probableIssue}`);
+    .map((scoredRule, index, hypotheses) => toHypothesis(scoredRule, hypotheses[index + 1]));
 
   return {
     probableIssue: bestMatch.rule.probableIssue,
@@ -631,7 +703,8 @@ export const analyzeVehicleSymptoms = async ({
     suggestedServiceCategory: bestMatch.rule.suggestedServiceCategory,
     urgencyAdvice: bestMatch.rule.urgencyAdvice,
     confidence: calculateConfidence(bestMatch, rankedRules[1]),
-    matchedSymptoms: unique([...bestMatch.matchedSymptoms, ...bestMatch.comboFindings]).slice(0, 5),
-    secondaryFindings,
+    matchedSymptoms: unique([...bestMatch.matchedSymptoms, ...bestMatch.comboFindings]).slice(0, 6),
+    secondaryHypotheses,
+    explanation: buildExplanation(bestMatch, rankedRules[1]),
   };
 };

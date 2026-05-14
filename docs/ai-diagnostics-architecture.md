@@ -58,7 +58,8 @@ The analysis flow is:
    - combination-specific boost values.
 5. Rules are ranked by score.
 6. The highest-ranked rule becomes the primary diagnostic result.
-7. Additional high-scoring rules are returned as secondary diagnostic hypotheses.
+7. The next 2–3 high-scoring rules are returned as secondary diagnostic hypotheses with their own confidence values.
+8. The module generates an explanation that lists matched symptoms, matched diagnostic combinations, scoring factors, and the separation from competing hypotheses.
 
 This approach makes the system more realistic than a simple keyword search because symptom combinations such as “хруст + поворот” or “вибрация + разгон” carry more diagnostic value than isolated words.
 
@@ -68,7 +69,10 @@ Confidence is calculated from:
 
 - the share of matched rule evidence compared to the maximum possible rule evidence;
 - separation between the best rule and the second-best rule;
-- additional boosts from strong symptom combinations.
+- additional boosts from strong symptom combinations;
+- the number of matched symptoms;
+- the importance weight of each symptom;
+- separation from competing hypotheses.
 
 The score is clamped to a realistic range so the module does not present preliminary diagnostics as absolute certainty. This is important because a web-based diagnostics module cannot replace an in-person inspection, measurements, or computer diagnostics.
 
@@ -85,6 +89,19 @@ The result is one of three levels:
 - **Low** — suitable for planned inspection.
 - **Medium** — diagnostics should be scheduled soon, and aggressive driving should be avoided.
 - **High** — the symptom may affect safety or engine integrity, and service should not be delayed.
+
+## Secondary hypotheses and explainability
+
+The module does not return only one answer. It also keeps the next ranked diagnostic candidates as secondary hypotheses. This makes the result more realistic because real vehicle diagnostics often involves several possible fault sources.
+
+The explanation block is generated from:
+
+- matched symptom keywords;
+- matched symptom combinations;
+- weighted score of the selected rule;
+- distance from the nearest competing hypothesis.
+
+This makes the diagnostic decision transparent enough for academic documentation and user trust.
 
 ## Recommendation generation
 
@@ -105,6 +122,10 @@ A rule-based expert system is well suited for this diploma project because:
 4. **Security** — no API keys or sensitive AI credentials are exposed in the browser.
 5. **Domain alignment** — rules can be mapped directly to GoodAvto service categories.
 6. **Academic value** — the implementation demonstrates expert-system principles: rules, weights, inference, ranking, and confidence scoring.
+
+## Local diagnostics history
+
+Recent diagnostics are stored in the browser using `localStorage`. No backend database is required. The history is limited to recent entries and is intended only for user convenience, so the user can return to previous checks during the same browser session/device usage.
 
 ## Future OpenAI / AI API upgrade path
 

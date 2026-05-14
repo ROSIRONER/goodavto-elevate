@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useMemo, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
 import { Activity, AlertTriangle, BrainCircuit, CheckCircle2, Gauge, Loader2, Sparkles, Wrench } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import CTAButtons from "./CTAButtons";
@@ -24,6 +24,33 @@ const dangerDescriptions: Record<DiagnosticResult["dangerLevel"], string> = {
 };
 
 const exampleSymptoms = "Стук при повороте руля и вибрация при разгоне";
+const diagnosticsHistoryKey = "goodavto-ai-diagnostics-history";
+const loadingStages = [
+  "Анализируем симптомы",
+  "Сопоставляем диагностические паттерны",
+  "Оцениваем уровень риска",
+  "Формируем рекомендации мастера",
+];
+
+interface DiagnosticHistoryItem {
+  id: string;
+  symptoms: string;
+  brand: string;
+  model: string;
+  createdAt: string;
+  result: DiagnosticResult;
+}
+
+const readDiagnosticsHistory = (): DiagnosticHistoryItem[] => {
+  if (typeof window === "undefined") return [];
+
+  try {
+    const savedHistory = window.localStorage.getItem(diagnosticsHistoryKey);
+    return savedHistory ? JSON.parse(savedHistory) : [];
+  } catch {
+    return [];
+  }
+};
 
 const AIDiagnosticsSection = () => {
   const [symptoms, setSymptoms] = useState("");
@@ -31,7 +58,9 @@ const AIDiagnosticsSection = () => {
   const [model, setModel] = useState("");
   const [result, setResult] = useState<DiagnosticResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [loadingStage, setLoadingStage] = useState(0);
   const [error, setError] = useState("");
+  const [history, setHistory] = useState<DiagnosticHistoryItem[]>(readDiagnosticsHistory);
 
   const symptomsLength = symptoms.trim().length;
   const canSubmit = symptomsLength >= 12 && !isLoading;
@@ -40,6 +69,43 @@ const AIDiagnosticsSection = () => {
     () => [brand.trim(), model.trim()].filter(Boolean).join(" "),
     [brand, model],
   );
+
+
+  useEffect(() => {
+    if (!isLoading) {
+      setLoadingStage(0);
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingStage((stage) => (stage + 1) % loadingStages.length);
+    }, 420);
+
+    return () => window.clearInterval(interval);
+  }, [isLoading]);
+
+  const saveToHistory = (diagnosticResult: DiagnosticResult) => {
+    const historyItem: DiagnosticHistoryItem = {
+      id: `${Date.now()}`,
+      symptoms: symptoms.trim(),
+      brand: brand.trim(),
+      model: model.trim(),
+      createdAt: new Date().toISOString(),
+      result: diagnosticResult,
+    };
+    const nextHistory = [historyItem, ...history].slice(0, 5);
+
+    setHistory(nextHistory);
+    window.localStorage.setItem(diagnosticsHistoryKey, JSON.stringify(nextHistory));
+  };
+
+  const loadHistoryItem = (item: DiagnosticHistoryItem) => {
+    setSymptoms(item.symptoms);
+    setBrand(item.brand);
+    setModel(item.model);
+    setResult(item.result);
+    setError("");
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,6 +121,7 @@ const AIDiagnosticsSection = () => {
     try {
       const diagnosticResult = await analyzeVehicleSymptoms({ symptoms, brand, model });
       setResult(diagnosticResult);
+      saveToHistory(diagnosticResult);
     } catch {
       setError("Не удалось выполнить анализ. Попробуйте ещё раз или свяжитесь с нами напрямую.");
     } finally {
@@ -172,6 +239,32 @@ const AIDiagnosticsSection = () => {
                   Пример
                 </Button>
               </div>
+
+              {history.length > 0 && (
+                <div className="mt-6 border-t border-border pt-5">
+                  <div className="mb-3 font-label text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    Последние диагностики
+                  </div>
+                  <div className="space-y-2">
+                    {history.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => loadHistoryItem(item)}
+                        className="w-full rounded-xl border border-border bg-secondary/30 p-3 text-left transition-colors hover:border-primary/30 hover:bg-secondary/50"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="line-clamp-1 font-body text-sm font-medium">{item.result.probableIssue}</span>
+                          <span className="shrink-0 font-body text-xs text-primary">{item.result.confidence}%</span>
+                        </div>
+                        <div className="mt-1 line-clamp-1 font-body text-xs text-muted-foreground">
+                          {item.symptoms}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </form>
           </AnimatedSection>
 
@@ -191,8 +284,16 @@ const AIDiagnosticsSection = () => {
                     <Loader2 className="h-10 w-10 animate-spin text-primary" />
                   </div>
                   <p className="mt-5 font-body text-sm text-muted-foreground">
-                    AI-модуль сопоставляет симптомы с типовыми неисправностями и категориями работ...
+                    {loadingStages[loadingStage]}...
                   </p>
+                  <div className="mt-5 flex flex-wrap justify-center gap-2">
+                    {loadingStages.map((stage, index) => (
+                      <span
+                        key={stage}
+                        className={`h-2 w-8 rounded-full transition-colors ${index <= loadingStage ? "bg-primary" : "bg-muted"}`}
+                      />
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -251,15 +352,11 @@ const AIDiagnosticsSection = () => {
 
                   <div className="grid gap-4 md:grid-cols-2">
                     <ResultCard
-                      title="Совпавшие признаки"
+                      title="Почему выбран этот диагноз"
                       icon={<Activity className="h-5 w-5" />}
-                      items={result.matchedSymptoms.length ? result.matchedSymptoms : ["Недостаточно точных признаков — рекомендуем описать условия проявления подробнее"]}
+                      items={[result.explanation.summary, ...result.explanation.evidence, ...result.explanation.scoringFactors]}
                     />
-                    <ResultCard
-                      title="Дополнительные гипотезы"
-                      icon={<BrainCircuit className="h-5 w-5" />}
-                      items={result.secondaryFindings.length ? result.secondaryFindings : ["Выраженных дополнительных системных совпадений не найдено"]}
-                    />
+                    <SecondaryHypothesesCard hypotheses={result.secondaryHypotheses} />
                   </div>
 
                   <div className="rounded-2xl border border-border bg-secondary/30 p-5">
@@ -297,6 +394,33 @@ const AIDiagnosticsSection = () => {
     </section>
   );
 };
+
+const SecondaryHypothesesCard = ({ hypotheses }: { hypotheses: DiagnosticResult["secondaryHypotheses"] }) => (
+  <div className="rounded-2xl border border-border bg-secondary/30 p-5">
+    <div className="mb-4 flex items-center gap-3 font-display text-lg font-bold">
+      <span className="text-primary"><BrainCircuit className="h-5 w-5" /></span>
+      Дополнительные гипотезы
+    </div>
+    {hypotheses.length ? (
+      <div className="space-y-3">
+        {hypotheses.map((hypothesis, index) => (
+          <div key={`${hypothesis.affectedSystem}-${hypothesis.probableIssue}`} className="rounded-xl border border-border bg-background/30 p-3">
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <Badge variant="outline" className="border-border text-muted-foreground">#{index + 2}</Badge>
+              <span className="font-body text-xs text-primary">{hypothesis.confidence}%</span>
+            </div>
+            <div className="font-body text-sm font-semibold">{hypothesis.probableIssue}</div>
+            <div className="mt-1 font-body text-xs text-muted-foreground">{hypothesis.affectedSystem}</div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p className="font-body text-sm leading-relaxed text-muted-foreground">
+        Выраженных конкурирующих гипотез не найдено — основной диагноз существенно сильнее остальных совпадений.
+      </p>
+    )}
+  </div>
+);
 
 const ResultCard = ({ title, icon, items }: { title: string; icon: ReactNode; items: string[] }) => (
   <div className="rounded-2xl border border-border bg-secondary/30 p-5">
