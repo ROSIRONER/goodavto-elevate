@@ -1,5 +1,5 @@
 import { FormEvent, ReactNode, useMemo, useState } from "react";
-import { AlertTriangle, BrainCircuit, CheckCircle2, Gauge, Loader2, Sparkles, Wrench } from "lucide-react";
+import { Activity, AlertTriangle, BrainCircuit, CheckCircle2, Gauge, Loader2, Sparkles, Wrench } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import CTAButtons from "./CTAButtons";
 import SectionHeading from "./SectionHeading";
@@ -15,6 +15,12 @@ const dangerStyles: Record<DiagnosticResult["dangerLevel"], string> = {
   Низкий: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
   Средний: "border-yellow-500/30 bg-yellow-500/10 text-yellow-300",
   Высокий: "border-primary/40 bg-primary/10 text-primary",
+};
+
+const dangerDescriptions: Record<DiagnosticResult["dangerLevel"], string> = {
+  Низкий: "Можно планово записаться на проверку и обслуживание.",
+  Средний: "Рекомендуется диагностика в ближайшее время, без лишних нагрузок на автомобиль.",
+  Высокий: "Не откладывайте обращение в сервис; при усилении симптомов лучше прекратить движение.",
 };
 
 const exampleSymptoms = "Стук при повороте руля и вибрация при разгоне";
@@ -95,6 +101,7 @@ const AIDiagnosticsSection = () => {
                 value={symptoms}
                 onChange={(event) => setSymptoms(event.target.value)}
                 placeholder="Например: стук при повороте руля и вибрация при разгоне"
+                maxLength={500}
                 className="mt-2 min-h-[150px] resize-none border-border bg-background/70 font-body text-sm"
               />
               <div className="mt-2 flex items-center justify-between gap-3 font-body text-xs text-muted-foreground">
@@ -195,9 +202,10 @@ const AIDiagnosticsSection = () => {
                   <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground">
                     Заполните симптомы слева, и здесь появятся вероятная неисправность, причины, уровень опасности и рекомендации.
                   </p>
-                  <div className="mt-5 grid gap-3 text-left font-body text-sm text-muted-foreground sm:grid-cols-2">
-                    <div className="rounded-xl bg-secondary/50 p-4">Безопасная архитектура: реальный OpenAI API должен вызываться через backend/serverless.</div>
-                    <div className="rounded-xl bg-secondary/50 p-4">История диагностик может храниться только с согласием клиента.</div>
+                  <div className="mt-5 grid gap-3 text-left font-body text-sm text-muted-foreground sm:grid-cols-3">
+                    <div className="rounded-xl bg-secondary/50 p-4">1. Опишите звук, вибрацию, запах или индикатор на панели.</div>
+                    <div className="rounded-xl bg-secondary/50 p-4">2. Укажите, когда симптом проявляется: при запуске, разгоне, торможении или повороте.</div>
+                    <div className="rounded-xl bg-secondary/50 p-4">3. Получите предварительный вывод и рекомендуемую категорию работ.</div>
                   </div>
                 </div>
               )}
@@ -205,10 +213,13 @@ const AIDiagnosticsSection = () => {
               {!isLoading && result && (
                 <div className="space-y-5">
                   <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-                    <div className="mb-3 flex flex-wrap items-center gap-3">
-                      <Badge className={dangerStyles[result.dangerLevel]}>Опасность: {result.dangerLevel}</Badge>
+                    <div className="mb-4 flex flex-wrap items-center gap-3">
+                      <Badge className={dangerStyles[result.dangerLevel]}>Уровень риска: {result.dangerLevel}</Badge>
                       <Badge variant="outline" className="border-border text-muted-foreground">
                         Уверенность: {result.confidence}%
+                      </Badge>
+                      <Badge variant="outline" className="border-border text-muted-foreground">
+                        Система: {result.affectedSystem}
                       </Badge>
                       {selectedVehicle && (
                         <Badge variant="outline" className="border-border text-muted-foreground">
@@ -216,12 +227,39 @@ const AIDiagnosticsSection = () => {
                         </Badge>
                       )}
                     </div>
-                    <h4 className="font-display text-2xl font-bold text-foreground">{result.probableIssue}</h4>
+                    <div className="grid gap-4 lg:grid-cols-[1fr_0.78fr]">
+                      <div>
+                        <div className="font-label text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                          Вероятная неисправность
+                        </div>
+                        <h4 className="mt-2 font-display text-2xl font-bold text-foreground">{result.probableIssue}</h4>
+                      </div>
+                      <div className={`rounded-2xl border p-4 ${dangerStyles[result.dangerLevel]}`}>
+                        <div className="flex items-center gap-2 font-display text-lg font-bold">
+                          <AlertTriangle className="h-5 w-5" />
+                          {result.dangerLevel} риск
+                        </div>
+                        <p className="mt-2 font-body text-sm leading-relaxed">{dangerDescriptions[result.dangerLevel]}</p>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="grid gap-4 md:grid-cols-2">
                     <ResultCard title="Возможные причины" icon={<AlertTriangle className="h-5 w-5" />} items={result.possibleCauses} />
-                    <ResultCard title="Рекомендации" icon={<CheckCircle2 className="h-5 w-5" />} items={result.recommendations} />
+                    <ResultCard title="Рекомендации мастера" icon={<CheckCircle2 className="h-5 w-5" />} items={result.recommendations} />
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <ResultCard
+                      title="Совпавшие признаки"
+                      icon={<Activity className="h-5 w-5" />}
+                      items={result.matchedSymptoms.length ? result.matchedSymptoms : ["Недостаточно точных признаков — рекомендуем описать условия проявления подробнее"]}
+                    />
+                    <ResultCard
+                      title="Дополнительные гипотезы"
+                      icon={<BrainCircuit className="h-5 w-5" />}
+                      items={result.secondaryFindings.length ? result.secondaryFindings : ["Выраженных дополнительных системных совпадений не найдено"]}
+                    />
                   </div>
 
                   <div className="rounded-2xl border border-border bg-secondary/30 p-5">
@@ -234,6 +272,9 @@ const AIDiagnosticsSection = () => {
                           Рекомендуемая категория сервиса
                         </div>
                         <div className="mt-2 font-display text-xl font-bold">{result.suggestedServiceCategory}</div>
+                        <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
+                          {result.urgencyAdvice}
+                        </p>
                         <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
                           Для точной оценки мастер проверит автомобиль на месте и согласует стоимость до начала работ.
                         </p>
