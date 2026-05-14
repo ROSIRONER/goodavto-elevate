@@ -96,7 +96,12 @@ const AIDiagnosticsSection = () => {
     const nextHistory = [historyItem, ...history].slice(0, 5);
 
     setHistory(nextHistory);
-    window.localStorage.setItem(diagnosticsHistoryKey, JSON.stringify(nextHistory));
+
+    try {
+      window.localStorage.setItem(diagnosticsHistoryKey, JSON.stringify(nextHistory));
+    } catch {
+      // History is optional; diagnostics should still work if storage is unavailable.
+    }
   };
 
   const loadHistoryItem = (item: DiagnosticHistoryItem) => {
@@ -137,23 +142,23 @@ const AIDiagnosticsSection = () => {
   };
 
   return (
-    <section id="ai-diagnostics" className="relative overflow-hidden py-28">
-      <div className="container mx-auto px-6">
+    <section id="ai-diagnostics" className="relative overflow-hidden py-20 md:py-28">
+      <div className="container mx-auto px-4 sm:px-6">
         <SectionHeading
           label="AI Diagnostics"
           title="Интеллектуальная диагностика"
           subtitle="Опишите симптомы автомобиля обычными словами — модуль предварительно определит вероятную проблему, уровень риска и подходящее направление сервиса. Итог не заменяет осмотр мастера, но помогает быстрее понять, с чего начать."
         />
 
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
           <AnimatedSection>
-            <form onSubmit={handleSubmit} className="glass-surface rounded-2xl p-6 md:p-8">
-              <div className="mb-6 flex items-start gap-4">
+            <form onSubmit={handleSubmit} className="glass-surface rounded-2xl p-5 sm:p-6 md:p-8">
+              <div className="mb-6 flex flex-col items-start gap-4 sm:flex-row">
                 <div className="rounded-2xl bg-primary/10 p-3">
                   <BrainCircuit className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl font-bold">Опишите проблему</h3>
+                  <h3 className="font-display text-xl font-bold md:text-2xl">Опишите проблему</h3>
                   <p className="mt-2 font-body text-sm leading-relaxed text-muted-foreground">
                     Например: стук при повороте, вибрация при разгоне, перегрев, скрип тормозов или плавающие обороты.
                   </p>
@@ -169,9 +174,9 @@ const AIDiagnosticsSection = () => {
                 onChange={(event) => setSymptoms(event.target.value)}
                 placeholder="Например: стук при повороте руля и вибрация при разгоне"
                 maxLength={500}
-                className="mt-2 min-h-[150px] resize-none border-border bg-background/70 font-body text-sm"
+                className="mt-2 min-h-[130px] resize-none border-border bg-background/70 font-body text-sm sm:min-h-[150px]"
               />
-              <div className="mt-2 flex items-center justify-between gap-3 font-body text-xs text-muted-foreground">
+              <div className="mt-2 flex flex-col gap-1 font-body text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
                 <span>Минимум 12 символов</span>
                 <span>{symptomsLength}/500</span>
               </div>
@@ -233,7 +238,7 @@ const AIDiagnosticsSection = () => {
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-12 border-border bg-background/40 font-body"
+                  className="h-12 border-border bg-background/40 font-body sm:w-auto"
                   onClick={fillExample}
                 >
                   Пример
@@ -253,7 +258,7 @@ const AIDiagnosticsSection = () => {
                         onClick={() => loadHistoryItem(item)}
                         className="w-full rounded-xl border border-border bg-secondary/30 p-3 text-left transition-colors hover:border-primary/30 hover:bg-secondary/50"
                       >
-                        <div className="flex items-center justify-between gap-3">
+                        <div className="flex min-w-0 items-center justify-between gap-3">
                           <span className="line-clamp-1 font-body text-sm font-medium">{item.result.probableIssue}</span>
                           <span className="shrink-0 font-body text-xs text-primary">{item.result.confidence}%</span>
                         </div>
@@ -269,8 +274,8 @@ const AIDiagnosticsSection = () => {
           </AnimatedSection>
 
           <AnimatedSection delay={0.15}>
-            <div className="glass-surface relative min-h-full rounded-2xl p-6 md:p-8">
-              <div className="mb-6 flex items-center justify-between gap-4">
+            <div className="glass-surface relative min-h-full rounded-2xl p-5 sm:p-6 md:p-8">
+              <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
                   <div className="font-label text-xs font-medium uppercase tracking-[0.2em] text-primary">Результат анализа</div>
                   <h3 className="mt-2 font-display text-2xl font-bold">Предварительное заключение</h3>
@@ -279,7 +284,7 @@ const AIDiagnosticsSection = () => {
               </div>
 
               {isLoading && (
-                <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
+                <div className="flex min-h-[320px] flex-col items-center justify-center text-center sm:min-h-[420px]">
                   <div className="rounded-full bg-primary/10 p-5">
                     <Loader2 className="h-10 w-10 animate-spin text-primary" />
                   </div>
@@ -290,7 +295,7 @@ const AIDiagnosticsSection = () => {
                     {loadingStages.map((stage, index) => (
                       <span
                         key={stage}
-                        className={`h-2 w-8 rounded-full transition-colors ${index <= loadingStage ? "bg-primary" : "bg-muted"}`}
+                        className={`h-2 w-7 rounded-full transition-colors sm:w-8 ${index <= loadingStage ? "bg-primary" : "bg-muted"}`}
                       />
                     ))}
                   </div>
@@ -298,32 +303,32 @@ const AIDiagnosticsSection = () => {
               )}
 
               {!isLoading && !result && (
-                <div className="flex min-h-[420px] flex-col justify-center rounded-2xl border border-dashed border-border p-6 text-center">
+                <div className="flex min-h-[320px] flex-col justify-center rounded-2xl border border-dashed border-border p-4 text-center sm:min-h-[420px] sm:p-6">
                   <BrainCircuit className="mx-auto h-12 w-12 text-primary" />
                   <p className="mt-5 font-body text-base leading-relaxed text-muted-foreground">
                     Заполните симптомы слева, и здесь появятся вероятная неисправность, причины, уровень опасности и рекомендации.
                   </p>
                   <div className="mt-5 grid gap-3 text-left font-body text-sm text-muted-foreground sm:grid-cols-3">
-                    <div className="rounded-xl bg-secondary/50 p-4">1. Опишите звук, вибрацию, запах или индикатор на панели.</div>
-                    <div className="rounded-xl bg-secondary/50 p-4">2. Укажите, когда симптом проявляется: при запуске, разгоне, торможении или повороте.</div>
-                    <div className="rounded-xl bg-secondary/50 p-4">3. Получите предварительный вывод и рекомендуемую категорию работ.</div>
+                    <div className="rounded-xl bg-secondary/50 p-3 sm:p-4">1. Опишите звук, вибрацию, запах или индикатор на панели.</div>
+                    <div className="rounded-xl bg-secondary/50 p-3 sm:p-4">2. Укажите, когда симптом проявляется: при запуске, разгоне, торможении или повороте.</div>
+                    <div className="rounded-xl bg-secondary/50 p-3 sm:p-4">3. Получите предварительный вывод и рекомендуемую категорию работ.</div>
                   </div>
                 </div>
               )}
 
               {!isLoading && result && (
                 <div className="space-y-5">
-                  <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-                    <div className="mb-4 flex flex-wrap items-center gap-3">
-                      <Badge className={dangerStyles[result.dangerLevel]}>Уровень риска: {result.dangerLevel}</Badge>
-                      <Badge variant="outline" className="border-border text-muted-foreground">
+                  <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 sm:p-5">
+                    <div className="mb-4 flex flex-wrap items-center gap-2 sm:gap-3">
+                      <Badge className={`${dangerStyles[result.dangerLevel]} max-w-full whitespace-normal text-left leading-snug`}>Уровень риска: {result.dangerLevel}</Badge>
+                      <Badge variant="outline" className="max-w-full whitespace-normal border-border text-left leading-snug text-muted-foreground">
                         Уверенность: {result.confidence}%
                       </Badge>
-                      <Badge variant="outline" className="border-border text-muted-foreground">
+                      <Badge variant="outline" className="max-w-full whitespace-normal border-border text-left leading-snug text-muted-foreground">
                         Система: {result.affectedSystem}
                       </Badge>
                       {selectedVehicle && (
-                        <Badge variant="outline" className="border-border text-muted-foreground">
+                        <Badge variant="outline" className="max-w-full whitespace-normal border-border text-left leading-snug text-muted-foreground">
                           {selectedVehicle}
                         </Badge>
                       )}
@@ -333,7 +338,7 @@ const AIDiagnosticsSection = () => {
                         <div className="font-label text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
                           Вероятная неисправность
                         </div>
-                        <h4 className="mt-2 font-display text-2xl font-bold text-foreground">{result.probableIssue}</h4>
+                        <h4 className="mt-2 font-display text-xl font-bold text-foreground md:text-2xl">{result.probableIssue}</h4>
                       </div>
                       <div className={`rounded-2xl border p-4 ${dangerStyles[result.dangerLevel]}`}>
                         <div className="flex items-center gap-2 font-display text-lg font-bold">
@@ -359,8 +364,8 @@ const AIDiagnosticsSection = () => {
                     <SecondaryHypothesesCard hypotheses={result.secondaryHypotheses} />
                   </div>
 
-                  <div className="rounded-2xl border border-border bg-secondary/30 p-5">
-                    <div className="flex items-start gap-3">
+                  <div className="rounded-2xl border border-border bg-secondary/30 p-4 sm:p-5">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                       <div className="rounded-xl bg-primary/10 p-3 text-primary">
                         <Wrench className="h-5 w-5" />
                       </div>
@@ -379,7 +384,7 @@ const AIDiagnosticsSection = () => {
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border border-border bg-background/30 p-5">
+                  <div className="rounded-2xl border border-border bg-background/30 p-4 sm:p-5">
                     <p className="mb-4 font-body text-sm text-muted-foreground">
                       Хотите уточнить цену и сроки по результату диагностики?
                     </p>
@@ -396,7 +401,7 @@ const AIDiagnosticsSection = () => {
 };
 
 const SecondaryHypothesesCard = ({ hypotheses }: { hypotheses: DiagnosticResult["secondaryHypotheses"] }) => (
-  <div className="rounded-2xl border border-border bg-secondary/30 p-5">
+  <div className="rounded-2xl border border-border bg-secondary/30 p-4 sm:p-5">
     <div className="mb-4 flex items-center gap-3 font-display text-lg font-bold">
       <span className="text-primary"><BrainCircuit className="h-5 w-5" /></span>
       Дополнительные гипотезы
@@ -406,7 +411,7 @@ const SecondaryHypothesesCard = ({ hypotheses }: { hypotheses: DiagnosticResult[
         {hypotheses.map((hypothesis, index) => (
           <div key={`${hypothesis.affectedSystem}-${hypothesis.probableIssue}`} className="rounded-xl border border-border bg-background/30 p-3">
             <div className="mb-2 flex items-center justify-between gap-3">
-              <Badge variant="outline" className="border-border text-muted-foreground">#{index + 2}</Badge>
+              <Badge variant="outline" className="max-w-full whitespace-normal border-border text-left leading-snug text-muted-foreground">#{index + 2}</Badge>
               <span className="font-body text-xs text-primary">{hypothesis.confidence}%</span>
             </div>
             <div className="font-body text-sm font-semibold">{hypothesis.probableIssue}</div>
@@ -423,7 +428,7 @@ const SecondaryHypothesesCard = ({ hypotheses }: { hypotheses: DiagnosticResult[
 );
 
 const ResultCard = ({ title, icon, items }: { title: string; icon: ReactNode; items: string[] }) => (
-  <div className="rounded-2xl border border-border bg-secondary/30 p-5">
+  <div className="rounded-2xl border border-border bg-secondary/30 p-4 sm:p-5">
     <div className="mb-4 flex items-center gap-3 font-display text-lg font-bold">
       <span className="text-primary">{icon}</span>
       {title}
